@@ -1,6 +1,6 @@
 # Multi-stage build for Spring Boot application with JavaFX
 # Stage 1: Build stage
-FROM eclipse-temurin:17-jdk-alpine AS builder
+FROM eclipse-temurin:21-jdk-alpine AS builder
 
 # Install Maven
 RUN apk add --no-cache maven
@@ -25,7 +25,7 @@ RUN mvn clean package -DskipTests -B
 RUN ls -la target/
 
 # Stage 2: Runtime stage
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 
 # Create non-root user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
