@@ -22,9 +22,8 @@ Thumbs.db
 .git/
 .gitignore
 
-# Maven
-.mvn/
-!.mvn/wrapper/maven-wrapper.jar
+# Maven wrapper jar (keep .mvn/wrapper/maven-wrapper.properties)
+.mvn/wrapper/maven-wrapper.jar
 
 # Logs
 *.log

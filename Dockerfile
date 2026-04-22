@@ -8,9 +8,8 @@ RUN apk add --no-cache maven
 # Set working directory
 WORKDIR /build
 
-# Copy Maven wrapper and pom.xml first for better layer caching
-COPY mvnw mvnw.cmd pom.xml ./
-COPY .mvn .mvn
+# Copy pom.xml first for better layer caching
+COPY pom.xml ./
 
 # Download dependencies (cached if pom.xml doesn't change)
 RUN mvn dependency:go-offline -B || true
