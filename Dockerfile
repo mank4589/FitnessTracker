@@ -50,13 +50,8 @@ EXPOSE 8080
 # Expose port 8082 for H2 console (if enabled)
 EXPOSE 8082
 
-# Set environment variables
-ENV JAVA_OPTS="-Xmx512m -Xms256m"
-
-# Note: JavaFX requires a display server. For headless mode or GUI access:
-# - Use X11 forwarding: docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix
-# - Use VNC server in container
-# - Run in headless mode if the app supports it
+# Set environment variables — keep JVM memory under Railway's 512MB limit
+ENV JAVA_OPTS="-Xmx256m -Xms128m"
 
 # Run the application
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
