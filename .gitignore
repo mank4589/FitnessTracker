@@ -4,6 +4,12 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Java Upgrade Session Files ###
+.github/java-upgrade/
+
+### H2 Database Files ###
+data/
+
 ### STS ###
 .apt_generated
 .classpath

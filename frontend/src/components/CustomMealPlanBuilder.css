@@ -1,0 +1,639 @@
+/* ═══════════════ CUSTOM MEAL PLAN BUILDER - DARK THEME ═══════════════ */
+
+.cmpb-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Header */
+.cmpb-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cmpb-header h2 {
+  color: var(--text-primary, #fafafa);
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cmpb-back-btn {
+  background: transparent;
+  border: 1px solid var(--border, #3f3f46);
+  color: var(--text-secondary, #a1a1aa);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.cmpb-back-btn:hover {
+  border-color: var(--text-muted, #71717a);
+  color: var(--text-primary, #fafafa);
+}
+
+.cmpb-save-btn {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cmpb-save-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.cmpb-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Setup Form (Step 1) */
+.cmpb-setup-form {
+  background: var(--bg-secondary, #18181b);
+  border: 1px solid var(--border, #3f3f46);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cmpb-form-group {
+  margin-bottom: 20px;
+}
+
+.cmpb-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-secondary, #a1a1aa);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cmpb-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-primary, #09090b);
+  border: 1px solid var(--border, #3f3f46);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-primary, #fafafa);
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.cmpb-input:focus {
+  outline: none;
+  border-color: var(--accent-primary, #6366f1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.cmpb-targets-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.cmpb-next-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s ease;
+}
+
+.cmpb-next-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+}
+
+/* Day Tabs */
+.cmpb-day-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.cmpb-day-tab {
+  background: var(--bg-secondary, #18181b);
+  border: 1px solid var(--border, #3f3f46);
+  color: var(--text-secondary, #a1a1aa);
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 90px;
+}
+
+.cmpb-day-tab.active {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-color: transparent;
+  color: white;
+}
+
+.cmpb-day-tab:hover:not(.active) {
+  border-color: var(--accent-primary, #6366f1);
+}
+
+.cmpb-tab-count {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* Builder Layout */
+.cmpb-builder-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Day Editor (Left) */
+.cmpb-day-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Meal Slots */
+.cmpb-slot {
+  background: var(--bg-secondary, #18181b);
+  border: 1px solid var(--border, #3f3f46);
+  border-radius: 14px;
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.cmpb-slot:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.cmpb-slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.cmpb-slot-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary, #fafafa);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cmpb-slot-pct {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.12);
+  color: #818cf8;
+  font-weight: 500;
+}
+
+.cmpb-slot-cal {
+  font-size: 13px;
+  color: var(--text-muted, #71717a);
+  font-weight: 500;
+}
+
+.cmpb-slot-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted, #71717a);
+  font-style: italic;
+  font-size: 13px;
+}
+
+/* Food Item Card (in slot) */
+.cmpb-food-card {
+  background: var(--bg-tertiary, #27272a);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent-primary, #6366f1);
+  transition: all 0.2s ease;
+}
+
+.cmpb-food-card:hover {
+  background: rgba(39, 39, 42, 0.8);
+}
+
+.cmpb-food-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.cmpb-food-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary, #fafafa);
+  margin: 0;
+}
+
+.cmpb-food-remove {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.cmpb-food-remove:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.cmpb-food-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.cmpb-food-macros {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cmpb-food-macros span {
+  background: var(--bg-primary, #09090b);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  color: var(--text-secondary, #a1a1aa);
+  font-weight: 600;
+}
+
+/* Dietary & Type Badges */
+.cmpb-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.cmpb-badge-vegan { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
+.cmpb-badge-veg { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+.cmpb-badge-egg { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+.cmpb-badge-nonveg { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+.cmpb-badge-dish { background: rgba(139, 92, 246, 0.12); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.2); }
+.cmpb-badge-cuisine { background: rgba(59, 130, 246, 0.12); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); }
+.cmpb-badge-serving { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+
+/* Search Panel (Right) */
+.cmpb-search-panel {
+  background: var(--bg-secondary, #18181b);
+  border: 1px solid var(--border, #3f3f46);
+  border-radius: 16px;
+  padding: 22px;
+  position: sticky;
+  top: 24px;
+}
+
+.cmpb-search-panel h3 {
+  color: var(--text-primary, #fafafa);
+  margin: 0 0 6px 0;
+  font-size: 16px;
+}
+
+.cmpb-search-hint {
+  color: var(--text-muted, #71717a);
+  font-size: 12px;
+  margin: 0 0 16px 0;
+}
+
+.cmpb-search-box {
+  position: relative;
+}
+
+.cmpb-slot-filter {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.cmpb-filter-btn {
+  background: var(--bg-tertiary, #27272a);
+  border: 1px solid var(--border, #3f3f46);
+  color: var(--text-secondary, #a1a1aa);
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.15s ease;
+}
+
+.cmpb-filter-btn.active {
+  background: var(--accent-primary, #6366f1);
+  border-color: var(--accent-primary, #6366f1);
+  color: white;
+}
+
+.cmpb-search-input-wrapper {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.cmpb-search-input {
+  width: 100%;
+  padding: 12px 16px;
+  padding-right: 40px;
+  background: var(--bg-primary, #09090b);
+  border: 1px solid var(--border, #3f3f46);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-primary, #fafafa);
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.cmpb-search-input:focus {
+  outline: none;
+  border-color: var(--accent-primary, #6366f1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.cmpb-search-spinner {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border, #3f3f46);
+  border-top-color: var(--accent-primary, #6366f1);
+  border-radius: 50%;
+  animation: cmpb-spin 0.6s linear infinite;
+}
+
+@keyframes cmpb-spin {
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+.cmpb-search-dropdown {
+  background: var(--bg-primary, #09090b);
+  border: 1px solid var(--border, #3f3f46);
+  border-radius: 12px;
+  max-height: 420px;
+  overflow-y: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.cmpb-search-result {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid rgba(63, 63, 70, 0.3);
+  gap: 12px;
+}
+
+.cmpb-search-result:hover {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.cmpb-search-result:last-child {
+  border-bottom: none;
+}
+
+.cmpb-result-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cmpb-result-name {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary, #fafafa);
+  margin-bottom: 4px;
+  text-transform: capitalize;
+}
+
+.cmpb-result-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.cmpb-result-cal {
+  font-size: 12px;
+  color: var(--text-muted, #71717a);
+  font-weight: 500;
+}
+
+.cmpb-result-pill {
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.cmpb-add-btn {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cmpb-add-btn:hover {
+  transform: scale(1.1);
+}
+
+.cmpb-search-msg {
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--text-muted, #71717a);
+  font-size: 13px;
+}
+
+.cmpb-load-more {
+  padding: 12px;
+  text-align: center;
+  color: var(--accent-primary, #6366f1);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  border-top: 1px solid var(--border, #3f3f46);
+}
+
+.cmpb-load-more:hover {
+  background: rgba(99, 102, 241, 0.06);
+}
+
+/* Day Summary Bar */
+.cmpb-day-summary {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 16px 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.cmpb-day-stat {
+  text-align: center;
+}
+
+.cmpb-day-stat-val {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-primary, #6366f1);
+}
+
+.cmpb-day-stat-lbl {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted, #71717a);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .cmpb-builder-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cmpb-search-panel {
+    position: static;
+  }
+
+  .cmpb-targets-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cmpb-conditions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ═══════════ MEDICAL CONDITIONS (Step 1) ═══════════ */
+
+.cmpb-conditions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.cmpb-condition-btn {
+  background: var(--bg-primary, #09090b);
+  border: 1px solid var(--border, #3f3f46);
+  color: var(--text-secondary, #a1a1aa);
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.cmpb-condition-btn:hover {
+  border-color: rgba(251, 146, 60, 0.5);
+  color: var(--text-primary, #fafafa);
+}
+
+.cmpb-condition-btn.active {
+  background: rgba(251, 146, 60, 0.12);
+  border-color: rgba(251, 146, 60, 0.5);
+  color: #fb923c;
+  font-weight: 600;
+  box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.1);
+}
+
+.cmpb-conditions-note {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(251, 146, 60, 0.06);
+  border: 1px solid rgba(251, 146, 60, 0.15);
+  border-radius: 10px;
+  color: #fdba74;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ═══════════ MEDICAL WARNINGS (Search Results) ═══════════ */
+
+.cmpb-result-warn {
+  border-left: 3px solid rgba(251, 146, 60, 0.6);
+  background: rgba(251, 146, 60, 0.03);
+}
+
+.cmpb-result-warn:hover {
+  background: rgba(251, 146, 60, 0.06);
+}
+
+.cmpb-medical-warnings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.cmpb-warning-pill {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 8px;
+  background: rgba(251, 146, 60, 0.12);
+  color: #fb923c;
+  border: 1px solid rgba(251, 146, 60, 0.25);
+  white-space: nowrap;
+}
