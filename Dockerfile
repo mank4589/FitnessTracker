@@ -51,7 +51,7 @@ EXPOSE 8080
 EXPOSE 8082
 
 # Set environment variables — keep JVM memory under Railway's 512MB limit
-ENV JAVA_OPTS="-Xmx256m -Xms128m"
+ENV JAVA_OPTS="-Xmx256m -Xms128m -Djava.net.preferIPv4Stack=true"
 
 # Run the application
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
