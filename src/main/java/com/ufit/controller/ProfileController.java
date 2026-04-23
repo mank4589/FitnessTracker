@@ -34,14 +34,6 @@ public class ProfileController {
             UserProfile profile = new UserProfile();
             profile.setUsername(username);
             profile.setName((String) body.get("name"));
-            
-            if (body.containsKey("age")) profile.setAge(((Number) body.get("age")).intValue());
-            if (body.containsKey("gender")) profile.setGender((String) body.get("gender"));
-            if (body.containsKey("heightCm")) profile.setHeightCm(((Number) body.get("heightCm")).doubleValue());
-            if (body.containsKey("weightKg")) profile.setWeightKg(((Number) body.get("weightKg")).doubleValue());
-            if (body.containsKey("activityLevel")) profile.setActivityLevel((String) body.get("activityLevel"));
-            if (body.containsKey("fitnessGoal")) profile.setFitnessGoal((String) body.get("fitnessGoal"));
-            if (body.containsKey("dietType")) profile.setDietType((String) body.get("dietType"));
 
             UserProfile created = profileService.register(profile, password);
             // Clear password hash before returning
