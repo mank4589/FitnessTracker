@@ -40,7 +40,7 @@
 }
 
 .cmpb-save-btn {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   color: white;
   border: none;
   padding: 10px 24px;
@@ -53,7 +53,7 @@
 
 .cmpb-save-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
 }
 
 .cmpb-save-btn:disabled {
@@ -100,8 +100,8 @@
 
 .cmpb-input:focus {
   outline: none;
-  border-color: var(--accent-primary, #6366f1);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: var(--accent-primary, #ffffff);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
 .cmpb-targets-grid {
@@ -112,7 +112,7 @@
 
 .cmpb-next-btn {
   width: 100%;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   color: white;
   border: none;
   padding: 14px 24px;
@@ -126,7 +126,7 @@
 
 .cmpb-next-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3);
 }
 
 /* Day Tabs */
@@ -157,13 +157,13 @@
 }
 
 .cmpb-day-tab.active {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   border-color: transparent;
   color: white;
 }
 
 .cmpb-day-tab:hover:not(.active) {
-  border-color: var(--accent-primary, #6366f1);
+  border-color: var(--accent-primary, #ffffff);
 }
 
 .cmpb-tab-count {
@@ -196,7 +196,7 @@
 }
 
 .cmpb-slot:hover {
-  border-color: rgba(99, 102, 241, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .cmpb-slot-header {
@@ -219,8 +219,8 @@
   font-size: 11px;
   padding: 2px 8px;
   border-radius: 999px;
-  background: rgba(99, 102, 241, 0.12);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.12);
+  color: #d4d4d4;
   font-weight: 500;
 }
 
@@ -244,7 +244,7 @@
   border-radius: 12px;
   padding: 14px;
   margin-bottom: 10px;
-  border-left: 3px solid var(--accent-primary, #6366f1);
+  border-left: 3px solid var(--accent-primary, #ffffff);
   transition: all 0.2s ease;
 }
 
@@ -312,13 +312,47 @@
   white-space: nowrap;
 }
 
-.cmpb-badge-vegan { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
-.cmpb-badge-veg { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
-.cmpb-badge-egg { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
-.cmpb-badge-nonveg { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
-.cmpb-badge-dish { background: rgba(139, 92, 246, 0.12); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.2); }
-.cmpb-badge-cuisine { background: rgba(59, 130, 246, 0.12); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); }
-.cmpb-badge-serving { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+.cmpb-badge-vegan {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.cmpb-badge-veg {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.cmpb-badge-egg {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.cmpb-badge-nonveg {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.cmpb-badge-dish {
+  background: rgba(139, 92, 246, 0.12);
+  color: #a78bfa;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.cmpb-badge-cuisine {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.cmpb-badge-serving {
+  background: rgba(34, 197, 94, 0.1);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
 
 /* Search Panel (Right) */
 .cmpb-search-panel {
@@ -365,8 +399,8 @@
 }
 
 .cmpb-filter-btn.active {
-  background: var(--accent-primary, #6366f1);
-  border-color: var(--accent-primary, #6366f1);
+  background: var(--accent-primary, #ffffff);
+  border-color: var(--accent-primary, #ffffff);
   color: white;
 }
 
@@ -391,8 +425,8 @@
 
 .cmpb-search-input:focus {
   outline: none;
-  border-color: var(--accent-primary, #6366f1);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: var(--accent-primary, #ffffff);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
 .cmpb-search-spinner {
@@ -403,13 +437,15 @@
   width: 18px;
   height: 18px;
   border: 2px solid var(--border, #3f3f46);
-  border-top-color: var(--accent-primary, #6366f1);
+  border-top-color: var(--accent-primary, #ffffff);
   border-radius: 50%;
   animation: cmpb-spin 0.6s linear infinite;
 }
 
 @keyframes cmpb-spin {
-  to { transform: translateY(-50%) rotate(360deg); }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
 }
 
 .cmpb-search-dropdown {
@@ -432,7 +468,7 @@
 }
 
 .cmpb-search-result:hover {
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .cmpb-search-result:last-child {
@@ -474,7 +510,7 @@
 }
 
 .cmpb-add-btn {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, #ffffff, #d4d4d4);
   color: white;
   border: none;
   width: 28px;
@@ -503,7 +539,7 @@
 .cmpb-load-more {
   padding: 12px;
   text-align: center;
-  color: var(--accent-primary, #6366f1);
+  color: var(--accent-primary, #ffffff);
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
@@ -511,13 +547,13 @@
 }
 
 .cmpb-load-more:hover {
-  background: rgba(99, 102, 241, 0.06);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 /* Day Summary Bar */
 .cmpb-day-summary {
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 16px 20px;
   border-radius: 12px;
   display: flex;
@@ -534,7 +570,7 @@
   display: block;
   font-size: 20px;
   font-weight: 700;
-  color: var(--accent-primary, #6366f1);
+  color: var(--accent-primary, #ffffff);
 }
 
 .cmpb-day-stat-lbl {

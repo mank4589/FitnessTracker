@@ -1,16 +1,1 @@
-package com.ufit.repository;
-
-import com.ufit.model.DailyGoal;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
-import java.util.Optional;
-
-@Repository
-public interface DailyGoalRepository extends JpaRepository<DailyGoal, Long> {
-
-    Optional<DailyGoal> findByGoalDate(LocalDate goalDate);
-
-    Optional<DailyGoal> findFirstByGoalDateBeforeOrderByGoalDateDesc(LocalDate goalDate);
-}
+package com.ufit.repository;\r\n\r\nimport com.ufit.model.DailyGoal;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.stereotype.Repository;\r\n\r\nimport java.time.LocalDate;\r\nimport java.util.Optional;\r\n\r\n@Repository\r\npublic interface DailyGoalRepository extends JpaRepository<DailyGoal, Long> {\r\n\r\n    Optional<DailyGoal> findByProfileIdAndGoalDate(Long profileId, LocalDate goalDate);\r\n\r\n    Optional<DailyGoal> findFirstByProfileIdAndGoalDateBeforeOrderByGoalDateDesc(Long profileId, LocalDate goalDate);\r\n}\r\n

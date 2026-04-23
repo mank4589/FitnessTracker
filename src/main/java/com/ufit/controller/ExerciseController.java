@@ -48,17 +48,17 @@ public class ExerciseController {
         return ResponseEntity.ok(exerciseService.getExerciseDetail(exerciseId));
     }
 
-    // ═══════════════ EXERCISE LOG CRUD ═══════════════
+    // ═══════════════ EXERCISE LOG CRUD (scoped by profileId) ═══════════════
 
-    @PostMapping("/log")
-    public ResponseEntity<ExerciseLog> logExercise(@RequestBody ExerciseLog entry) {
-        return ResponseEntity.ok(exerciseService.logExercise(entry));
+    @PostMapping("/{profileId}/log")
+    public ResponseEntity<ExerciseLog> logExercise(@PathVariable Long profileId, @RequestBody ExerciseLog entry) {
+        return ResponseEntity.ok(exerciseService.logExercise(profileId, entry));
     }
 
-    @GetMapping("/log/{date}")
-    public ResponseEntity<List<ExerciseLog>> getLogsByDate(@PathVariable String date) {
+    @GetMapping("/{profileId}/log/{date}")
+    public ResponseEntity<List<ExerciseLog>> getLogsByDate(@PathVariable Long profileId, @PathVariable String date) {
         LocalDate d = parseDateSafe(date);
-        return ResponseEntity.ok(exerciseService.getLogsByDate(d));
+        return ResponseEntity.ok(exerciseService.getLogsByDate(profileId, d));
     }
 
     @DeleteMapping("/log/{id}")
@@ -67,12 +67,11 @@ public class ExerciseController {
         return ResponseEntity.ok().build();
     }
 
-    // ═══════════════ DAILY SUMMARY ═══════════════
+    // ═══════════════ DAILY SUMMARY (scoped by profileId) ═══════════════
 
-    @GetMapping("/summary/{date}")
-    public ResponseEntity<Map<String, Object>> getDailySummary(@PathVariable String date) {
+    @GetMapping("/{profileId}/summary/{date}")
+    public ResponseEntity<Map<String, Object>> getDailySummary(@PathVariable Long profileId, @PathVariable String date) {
         LocalDate d = parseDateSafe(date);
-        return ResponseEntity.ok(exerciseService.getDailySummary(d));
+        return ResponseEntity.ok(exerciseService.getDailySummary(profileId, d));
     }
 }
-

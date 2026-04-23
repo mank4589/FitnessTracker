@@ -39,7 +39,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,8 +58,8 @@
 
 .overview-info .goal-badge {
   display: inline-block;
-  background: rgba(99, 102, 241, 0.15);
-  color: var(--accent-primary, #6366f1);
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--accent-primary, #ffffff);
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 13px;
@@ -176,13 +176,13 @@
 }
 
 .tag.muscle {
-  background: rgba(99, 102, 241, 0.15);
-  color: #6366f1;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
 }
 
 /* Edit Button */
 .btn-edit-profile {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -199,7 +199,7 @@
 
 .btn-edit-profile:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
 }
 
 /* Edit Form */
@@ -249,8 +249,8 @@
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: var(--accent-primary, #6366f1);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: var(--accent-primary, #ffffff);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
 .form-row {
@@ -281,20 +281,20 @@
 }
 
 .checkbox-label:hover {
-  border-color: var(--accent-primary, #6366f1);
+  border-color: var(--accent-primary, #ffffff);
   color: var(--text-primary, #fafafa);
 }
 
 .checkbox-label:has(input:checked) {
-  background: rgba(99, 102, 241, 0.15);
-  border-color: var(--accent-primary, #6366f1);
-  color: var(--accent-primary, #6366f1);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent-primary, #ffffff);
+  color: var(--accent-primary, #ffffff);
 }
 
 .checkbox-label input[type="checkbox"] {
   margin-right: 10px;
   cursor: pointer;
-  accent-color: var(--accent-primary, #6366f1);
+  accent-color: var(--accent-primary, #ffffff);
   width: 16px;
   height: 16px;
 }
@@ -308,7 +308,7 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: #10b981;
   color: white;
   padding: 14px 28px;
   border: none;
@@ -371,11 +371,11 @@
   .form-row {
     grid-template-columns: 1fr;
   }
-  
+
   .checkbox-grid {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .overview-header {
     flex-direction: column;
     text-align: center;

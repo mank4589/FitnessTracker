@@ -5,10 +5,11 @@ import CalorieTracker from './components/CalorieTracker';
 import ExerciseLogger from './components/ExerciseLogger';
 import UserProfile from './components/UserProfile';
 import ProfileSetup from './components/ProfileSetup';
+import LoginScreen from './components/LoginScreen';
 import MealPlanViewer from './components/MealPlanViewer';
 import WorkoutPlans from './components/WorkoutPlans';
 import ErrorBoundary from './components/ErrorBoundary';
-import { getAllProfiles, getProfileById, deleteProfile } from './services/api';
+import { getAllProfiles, getProfileById, deleteProfile, loginUser } from './services/api';
 import './App.css';
 
 const SECTIONS = [
@@ -31,87 +32,84 @@ const RECOMMENDATION_TABS = [
 
 function App() {
   const [currentProfile, setCurrentProfile] = useState(null);
-  const [allProfiles, setAllProfiles] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showProfileSetup, setShowProfileSetup] = useState(false);
   const [showProfileSwitcher, setShowProfileSwitcher] = useState(false);
   const [loading, setLoading] = useState(true);
-  
+
   const [activeSection, setActiveSection] = useState('recommendations');
   const [activeCalcTab, setActiveCalcTab] = useState('calculator');
   const [activeRecommendTab, setActiveRecommendTab] = useState('workouts');
 
-  // Load saved profile on mount
+  // Check for saved login on mount
   useEffect(() => {
-    loadInitialProfile();
+    checkSavedLogin();
   }, []);
 
-  const loadInitialProfile = async () => {
+  const checkSavedLogin = async () => {
     setLoading(true);
     try {
       const savedProfileId = localStorage.getItem('ufit_current_profile_id');
-      const response = await getAllProfiles();
-      const profiles = response.data;
-      setAllProfiles(profiles);
+      const savedUsername = localStorage.getItem('ufit_username');
 
-      if (savedProfileId) {
-        const savedProfile = profiles.find(p => p.id === savedProfileId);
-        if (savedProfile) {
-          setCurrentProfile(savedProfile);
-        } else if (profiles.length > 0) {
-          setCurrentProfile(profiles[0]);
-          localStorage.setItem('ufit_current_profile_id', profiles[0].id);
+      if (savedProfileId && savedUsername) {
+        // We have a saved session — try to load the profile
+        const res = await getProfileById(savedProfileId);
+        if (res.data) {
+          setCurrentProfile(res.data);
+          setIsLoggedIn(true);
         } else {
-          setShowProfileSetup(true);
+          // Profile no longer exists, clear storage
+          handleLogout();
         }
-      } else if (profiles.length > 0) {
-        // DEV DEFAULT: prefer "Mayank" profile if available
-        const defaultProfile = profiles.find(p => p.name?.toLowerCase().includes('mayank')) || profiles[0];
-        setCurrentProfile(defaultProfile);
-        localStorage.setItem('ufit_current_profile_id', defaultProfile.id);
-      } else {
-        setShowProfileSetup(true);
       }
+      // If nothing saved, user needs to login
     } catch (error) {
-      console.error('Error loading profiles:', error);
-      setShowProfileSetup(true);
+      console.error('Error restoring session:', error);
+      // Clear bad session data
+      localStorage.removeItem('ufit_current_profile_id');
+      localStorage.removeItem('ufit_username');
     } finally {
       setLoading(false);
     }
   };
 
+  const handleLoginSuccess = (profile) => {
+    setCurrentProfile(profile);
+    setIsLoggedIn(true);
+    localStorage.setItem('ufit_current_profile_id', profile.id);
+    localStorage.setItem('ufit_username', profile.username);
+
+    // If profile has no name or essential setup, show setup
+    if (!profile.name || !profile.heightCm || !profile.weightKg) {
+      setShowProfileSetup(true);
+    }
+  };
+
+  const handleLogout = () => {
+    setCurrentProfile(null);
+    setIsLoggedIn(false);
+    setShowProfileSwitcher(false);
+    localStorage.removeItem('ufit_current_profile_id');
+    localStorage.removeItem('ufit_username');
+  };
+
   const handleProfileCreated = (profile) => {
     setCurrentProfile(profile);
-    setAllProfiles(prev => [...prev, profile]);
     localStorage.setItem('ufit_current_profile_id', profile.id);
     setShowProfileSetup(false);
   };
 
-  const handleSwitchProfile = (profile) => {
-    setCurrentProfile(profile);
-    localStorage.setItem('ufit_current_profile_id', profile.id);
-    setShowProfileSwitcher(false);
-  };
-
   const handleProfileUpdated = (updatedProfile) => {
     setCurrentProfile(updatedProfile);
-    setAllProfiles(prev => prev.map(p => p.id === updatedProfile.id ? updatedProfile : p));
   };
 
   const handleDeleteProfile = async (profileId) => {
     if (!window.confirm('Are you sure you want to delete this profile? This cannot be undone.')) return;
     try {
       await deleteProfile(profileId);
-      const remaining = allProfiles.filter(p => p.id !== profileId);
-      setAllProfiles(remaining);
       if (currentProfile?.id === profileId) {
-        if (remaining.length > 0) {
-          setCurrentProfile(remaining[0]);
-          localStorage.setItem('ufit_current_profile_id', remaining[0].id);
-        } else {
-          setCurrentProfile(null);
-          localStorage.removeItem('ufit_current_profile_id');
-          setShowProfileSetup(true);
-        }
+        handleLogout();
       }
       setShowProfileSwitcher(false);
     } catch (err) {
@@ -139,8 +137,8 @@ function App() {
   const renderSection = () => {
     switch (activeSection) {
       case 'calculators': return renderCalculator();
-      case 'meals': return <CalorieTracker />;
-      case 'exercises': return <ExerciseLogger />;
+      case 'meals': return <CalorieTracker profileId={currentProfile?.id} />;
+      case 'exercises': return <ExerciseLogger profileId={currentProfile?.id} />;
       case 'recommendations': return renderRecommendations();
       default: return renderRecommendations();
     }
@@ -158,8 +156,17 @@ function App() {
     );
   }
 
+  // Not logged in — show login screen
+  if (!isLoggedIn) {
+    return <LoginScreen onLoginSuccess={handleLoginSuccess} />;
+  }
+
+  // Logged in but profile needs setup
   if (showProfileSetup) {
-    return <ProfileSetup onProfileCreated={handleProfileCreated} />;
+    return <ProfileSetup
+      existingProfile={currentProfile}
+      onProfileCreated={handleProfileCreated}
+    />;
   }
 
   return (
@@ -174,31 +181,28 @@ function App() {
             <span className="profile-name">{currentProfile?.name}</span>
             <span className="dropdown-arrow">▼</span>
           </button>
-          
+
           {showProfileSwitcher && (
             <div className="profile-dropdown">
-              <div className="dropdown-header">Switch Profile</div>
-              {allProfiles.map(profile => (
-                <div key={profile.id} className={`dropdown-item ${profile.id === currentProfile?.id ? 'active' : ''}`}>
-                  <button className="dropdown-item-main" onClick={() => handleSwitchProfile(profile)}>
-                    <span className="item-avatar">{profile.name?.charAt(0).toUpperCase()}</span>
-                    <div className="item-info">
-                      <span className="item-name">{profile.name}</span>
-                      <span className="item-goal">{profile.fitnessGoal?.replace('_', ' ')}</span>
-                    </div>
-                    {profile.id === currentProfile?.id && <span className="check-mark">✓</span>}
-                  </button>
-                  <button
-                    className="delete-profile-btn"
-                    title="Delete profile"
-                    onClick={(e) => { e.stopPropagation(); handleDeleteProfile(profile.id); }}
-                  >🗑️</button>
-                </div>
-              ))}
+              <div className="dropdown-header">Account</div>
+              <div className="dropdown-item active">
+                <button className="dropdown-item-main">
+                  <span className="item-avatar">{currentProfile?.name?.charAt(0).toUpperCase()}</span>
+                  <div className="item-info">
+                    <span className="item-name">{currentProfile?.name}</span>
+                    <span className="item-goal">@{currentProfile?.username}</span>
+                  </div>
+                  <span className="check-mark">✓</span>
+                </button>
+              </div>
               <div className="dropdown-divider"></div>
-              <button className="dropdown-item add-new" onClick={() => setShowProfileSetup(true)}>
-                <span className="item-avatar">+</span>
-                <span className="item-name">Create New Profile</span>
+              <button className="dropdown-item add-new" onClick={() => { setShowProfileSetup(true); setShowProfileSwitcher(false); }}>
+                <span className="item-avatar">⚙️</span>
+                <span className="item-name">Edit Profile</span>
+              </button>
+              <button className="dropdown-item add-new logout-btn" onClick={handleLogout}>
+                <span className="item-avatar">🚪</span>
+                <span className="item-name">Log Out</span>
               </button>
             </div>
           )}

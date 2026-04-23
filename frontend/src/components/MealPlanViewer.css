@@ -29,11 +29,16 @@
   gap: 16px;
 }
 
-.mp-header-left h2 { margin-bottom: 4px; }
-.mp-header-left .meal-plan-subtitle { margin-bottom: 0; }
+.mp-header-left h2 {
+  margin-bottom: 4px;
+}
+
+.mp-header-left .meal-plan-subtitle {
+  margin-bottom: 0;
+}
 
 .mp-create-btn {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -55,7 +60,7 @@
 
 .mp-create-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.35);
 }
 
 .mp-create-btn:disabled {
@@ -106,8 +111,8 @@
 
 .control-group select:focus {
   outline: none;
-  border-color: var(--accent-primary, #6366f1);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: var(--accent-primary, #ffffff);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
 .action-buttons {
@@ -116,7 +121,7 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -129,7 +134,7 @@
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
 }
 
 .btn-primary:disabled {
@@ -162,7 +167,7 @@
 
 /* Plan Header */
 .plan-header {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   color: white;
   padding: 28px;
   border-radius: 16px;
@@ -208,15 +213,15 @@
 }
 
 .day-card:hover {
-  border-color: var(--accent-primary, #6366f1);
+  border-color: var(--accent-primary, #ffffff);
   transform: translateY(-2px);
 }
 
 .day-card h3 {
-  color: var(--accent-primary, #6366f1);
+  color: var(--accent-primary, #ffffff);
   margin: 0 0 20px 0;
   padding-bottom: 12px;
-  border-bottom: 2px solid var(--accent-primary, #6366f1);
+  border-bottom: 2px solid var(--accent-primary, #ffffff);
   font-size: 18px;
   text-transform: capitalize;
   font-weight: 700;
@@ -247,8 +252,8 @@
   font-size: 11px;
   padding: 2px 7px;
   border-radius: 999px;
-  background: rgba(99, 102, 241, 0.12);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.12);
+  color: #d4d4d4;
   font-weight: 500;
   letter-spacing: 0;
   text-transform: none;
@@ -266,7 +271,7 @@
   background: var(--bg-tertiary, #27272a);
   padding: 16px;
   border-radius: 12px;
-  border-left: 3px solid var(--accent-primary, #6366f1);
+  border-left: 3px solid var(--accent-primary, #ffffff);
   margin-bottom: 10px;
 }
 
@@ -281,7 +286,7 @@
 }
 
 .multi-meal-entry:not(:last-child) {
-  border-bottom: 1px dashed rgba(99, 102, 241, 0.2);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
 }
 
 .meal-badges-row {
@@ -428,8 +433,8 @@
 /* Slot Edit / Add Buttons */
 .slot-edit-btn {
   background: transparent;
-  border: 1px dashed rgba(99, 102, 241, 0.4);
-  color: #818cf8;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  color: #d4d4d4;
   padding: 6px 14px;
   border-radius: 8px;
   cursor: pointer;
@@ -439,8 +444,8 @@
 }
 
 .slot-edit-btn:hover {
-  border-color: #6366f1;
-  background: rgba(99, 102, 241, 0.08);
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .slot-edit-inline {
@@ -468,7 +473,7 @@
 /* Inline Slot Editor */
 .slot-editor {
   background: var(--bg-primary, #09090b);
-  border: 1px solid var(--accent-primary, #6366f1);
+  border: 1px solid var(--accent-primary, #ffffff);
   border-radius: 12px;
   margin-top: 10px;
   overflow: hidden;
@@ -476,8 +481,15 @@
 }
 
 @keyframes slot-editor-in {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .slot-editor-header {
@@ -500,7 +512,7 @@
 
 .slot-editor-input:focus {
   outline: none;
-  border-color: var(--accent-primary, #6366f1);
+  border-color: var(--accent-primary, #ffffff);
 }
 
 .slot-editor-close {
@@ -535,7 +547,7 @@
 }
 
 .slot-editor-item:hover {
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .slot-editor-item:last-child {
@@ -561,8 +573,8 @@
 
 /* Day Summary */
 .day-summary {
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 16px;
   border-radius: 12px;
   margin-top: 16px;
@@ -591,7 +603,7 @@
   display: block;
   font-size: 20px;
   font-weight: 700;
-  color: var(--accent-primary, #6366f1);
+  color: var(--accent-primary, #ffffff);
   margin-bottom: 4px;
 }
 
@@ -632,12 +644,12 @@
 }
 
 .mp-plan-item.active {
-  border-color: var(--accent-primary, #6366f1);
-  background: rgba(99, 102, 241, 0.06);
+  border-color: var(--accent-primary, #ffffff);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .mp-plan-item:hover {
-  border-color: rgba(99, 102, 241, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .mp-plan-info h4 {
@@ -657,9 +669,9 @@
 }
 
 .mp-btn-load {
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #d4d4d4;
   padding: 5px 14px;
   border-radius: 8px;
   cursor: pointer;
@@ -669,7 +681,7 @@
 }
 
 .mp-btn-load:hover {
-  background: rgba(99, 102, 241, 0.2);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .mp-btn-delete {
@@ -744,19 +756,20 @@
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .action-buttons {
     flex-direction: column;
   }
 
-  .btn-primary, .btn-secondary {
+  .btn-primary,
+  .btn-secondary {
     width: 100%;
   }
-  
+
   .days-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .summary-stats {
     grid-template-columns: repeat(2, 1fr);
   }

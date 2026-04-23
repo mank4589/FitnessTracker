@@ -37,7 +37,7 @@
 }
 
 .wp-create-btn {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -53,7 +53,7 @@
 
 .wp-create-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.4);
 }
 
 .wp-create-btn:disabled {
@@ -76,14 +76,16 @@
   width: 40px;
   height: 40px;
   border: 3px solid var(--border, #3f3f46);
-  border-top-color: #6366f1;
+  border-top-color: #ffffff;
   border-radius: 50%;
   margin: 0 auto 16px;
   animation: wp-spin 0.8s linear infinite;
 }
 
 @keyframes wp-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .wp-loading p {
@@ -127,7 +129,7 @@
 }
 
 .wp-active-badge {
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: #10b981;
   color: white;
   padding: 6px 16px;
   border-radius: 20px;
@@ -147,9 +149,9 @@
 }
 
 .wp-edit-btn {
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #d4d4d4;
   padding: 6px 16px;
   border-radius: 10px;
   font-size: 13px;
@@ -160,8 +162,8 @@
 }
 
 .wp-edit-btn:hover {
-  background: rgba(99, 102, 241, 0.2);
-  border-color: #6366f1;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
   transform: translateY(-1px);
 }
 
@@ -189,17 +191,19 @@
 }
 
 .wp-day-pill:hover {
-  border-color: rgba(99, 102, 241, 0.5);
+  border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-1px);
 }
 
 .wp-day-pill.active {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   border-color: transparent;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
-.wp-day-pill.rest { opacity: 0.6; }
+.wp-day-pill.rest {
+  opacity: 0.6;
+}
 
 .wp-day-pill-name {
   display: block;
@@ -228,9 +232,20 @@
   padding: 60px 24px;
 }
 
-.wp-rest-icon { font-size: 64px; margin-bottom: 16px; }
-.wp-rest-day h3 { color: var(--text-primary, #fff); margin: 0 0 8px 0; }
-.wp-rest-day p { color: var(--text-secondary, #a1a1aa); margin: 0; }
+.wp-rest-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.wp-rest-day h3 {
+  color: var(--text-primary, #fff);
+  margin: 0 0 8px 0;
+}
+
+.wp-rest-day p {
+  color: var(--text-secondary, #a1a1aa);
+  margin: 0;
+}
 
 /* ─── Day Content ─── */
 .wp-day-info-row {
@@ -252,8 +267,8 @@
 }
 
 .wp-focus-badge {
-  background: rgba(99, 102, 241, 0.15);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.15);
+  color: #d4d4d4;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 12px;
@@ -276,7 +291,9 @@
   border-radius: 14px;
 }
 
-.wp-stat { text-align: center; }
+.wp-stat {
+  text-align: center;
+}
 
 .wp-stat-val {
   display: block;
@@ -310,7 +327,7 @@
 }
 
 .wp-exercise-card:hover {
-  border-color: rgba(99, 102, 241, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
   background: rgba(39, 39, 42, 0.8);
 }
 
@@ -321,8 +338,8 @@
 .wp-ex-order {
   width: 32px;
   height: 32px;
-  background: rgba(99, 102, 241, 0.15);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.15);
+  color: #d4d4d4;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -332,7 +349,9 @@
   flex-shrink: 0;
 }
 
-.wp-ex-body { flex: 1; }
+.wp-ex-body {
+  flex: 1;
+}
 
 .wp-ex-top {
   display: flex;
@@ -384,7 +403,9 @@
   text-align: center;
 }
 
-.wp-metric.rest { margin-left: auto; }
+.wp-metric.rest {
+  margin-left: auto;
+}
 
 .wp-metric-val {
   display: block;
@@ -416,7 +437,7 @@
   font-style: italic;
   margin: 0 0 6px 0;
   padding: 6px 10px;
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 6px;
 }
 
@@ -427,7 +448,7 @@
 }
 
 .wp-primary-muscle {
-  color: #818cf8;
+  color: #d4d4d4;
   font-weight: 600;
   text-transform: capitalize;
 }
@@ -493,7 +514,7 @@
 .wp-split-card:hover {
   border-color: transparent;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05),
-              0 12px 40px -8px var(--split-glow);
+    0 12px 40px -8px var(--split-glow);
   transform: translateY(-4px);
 }
 
@@ -649,9 +670,9 @@
 }
 
 .wp-view-routine-btn:hover {
-  border-color: rgba(99, 102, 241, 0.5);
-  color: #818cf8;
-  background: rgba(99, 102, 241, 0.05);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #d4d4d4;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .wp-split-card.expanded {
@@ -688,7 +709,7 @@
 }
 
 .wp-routine-day-btn:hover {
-  border-color: rgba(99, 102, 241, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
   color: var(--text-primary, #fff);
 }
 
@@ -765,14 +786,14 @@
 }
 
 .wp-routine-ex:hover {
-  background: rgba(99, 102, 241, 0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .wp-routine-ex-num {
   width: 26px;
   height: 26px;
-  background: rgba(99, 102, 241, 0.12);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.12);
+  color: #d4d4d4;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -851,7 +872,7 @@
 }
 
 .wp-plan-item:hover {
-  border-color: rgba(99, 102, 241, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .wp-plan-item.active {
@@ -883,8 +904,15 @@
 }
 
 @keyframes wp-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
 }
 
 .wp-plan-meta-row {
@@ -902,8 +930,8 @@
 }
 
 .wp-custom-tag {
-  background: rgba(99, 102, 241, 0.15);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.15);
+  color: #d4d4d4;
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 10px;
@@ -917,7 +945,7 @@
 }
 
 .wp-btn-activate {
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: #10b981;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -970,8 +998,8 @@
 }
 
 .wp-show-more:hover {
-  border-color: rgba(99, 102, 241, 0.4);
-  color: #818cf8;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #d4d4d4;
 }
 
 /* ═══════════════ EMPTY STATE ═══════════════ */
@@ -1010,25 +1038,39 @@
 /* ═══════════════ RESPONSIVE ═══════════════ */
 
 @media (max-width: 768px) {
-  .wp-container { padding: 16px; }
+  .wp-container {
+    padding: 16px;
+  }
 
   .wp-header {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .wp-create-btn { width: 100%; justify-content: center; }
+  .wp-create-btn {
+    width: 100%;
+    justify-content: center;
+  }
 
   .wp-splits-grid {
     grid-template-columns: 1fr;
   }
 
-  .wp-active-plan { padding: 20px; }
+  .wp-active-plan {
+    padding: 20px;
+  }
 
-  .wp-day-stats { justify-content: space-around; }
+  .wp-day-stats {
+    justify-content: space-around;
+  }
 
-  .wp-ex-metrics { flex-wrap: wrap; }
-  .wp-metric.rest { margin-left: 0; }
+  .wp-ex-metrics {
+    flex-wrap: wrap;
+  }
+
+  .wp-metric.rest {
+    margin-left: 0;
+  }
 
   .wp-plan-item {
     flex-direction: column;
@@ -1041,6 +1083,11 @@
 }
 
 @media (max-width: 480px) {
-  .wp-page-title { font-size: 22px; }
-  .wp-splits-grid { grid-template-columns: 1fr; }
+  .wp-page-title {
+    font-size: 22px;
+  }
+
+  .wp-splits-grid {
+    grid-template-columns: 1fr;
+  }
 }

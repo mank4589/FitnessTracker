@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { createProfile } from '../services/api';
+import { createProfile, updateProfile } from '../services/api';
 import './ProfileSetup.css';
 
-const ProfileSetup = ({ onProfileCreated }) => {
+const ProfileSetup = ({ onProfileCreated, existingProfile }) => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   
   const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    gender: 'MALE',
-    heightCm: '',
-    weightKg: '',
+    name: existingProfile?.name || '',
+    age: existingProfile?.age || '',
+    gender: existingProfile?.gender || 'MALE',
+    heightCm: existingProfile?.heightCm || '',
+    weightKg: existingProfile?.weightKg || '',
     fitnessGoal: 'MAINTAIN',
     activityLevel: 'MODERATE',
     experienceLevel: 'BEGINNER',
@@ -155,8 +155,14 @@ const ProfileSetup = ({ onProfileCreated }) => {
         snacksPerDay: parseInt(formData.snacksPerDay),
       };
       
-      const response = await createProfile(profileData);
-      onProfileCreated(response.data);
+      if (existingProfile?.id) {
+        // Update existing profile
+        const response = await updateProfile(existingProfile.id, profileData);
+        onProfileCreated(response.data);
+      } else {
+        const response = await createProfile(profileData);
+        onProfileCreated(response.data);
+      }
     } catch (error) {
       console.error('Error creating profile:', error);
       setError('Failed to create profile. Please try again.');

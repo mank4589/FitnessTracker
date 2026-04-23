@@ -20,7 +20,7 @@ export const saveHealthReport = (data) => API.post('/health/report', data);
 export const getHealthHistory = () => API.get('/health/history');
 export const deleteHealthReport = (id) => API.delete(`/health/history/${id}`);
 
-// ═══════════════ FOOD / CALORIE TRACKER ═══════════════
+// ═══════════════ FOOD / CALORIE TRACKER (scoped by profileId) ═══════════════
 
 export const suggestFood = (q, conditions) => {
   const params = { q };
@@ -28,32 +28,34 @@ export const suggestFood = (q, conditions) => {
   return API.get('/food/suggest', { params });
 };
 export const searchFood = (query) => API.get('/food/search', { params: { query } });
-export const logFood = (entry) => API.post('/food/log', entry);
-export const getFoodLog = (date) => API.get(`/food/log/${date}`);
+export const logFood = (profileId, entry) => API.post(`/food/${profileId}/log`, entry);
+export const getFoodLog = (profileId, date) => API.get(`/food/${profileId}/log/${date}`);
 export const deleteFoodLog = (id) => API.delete(`/food/log/${id}`);
-export const getDailySummary = (date) => API.get(`/food/summary/${date}`);
-export const getWeeklySummary = (date) => API.get(`/food/weekly/${date}`);
-export const setDailyGoal = (goal) => API.post('/food/goal', goal);
-export const getDailyGoal = (date) => API.get(`/food/goal/${date}`);
+export const getDailySummary = (profileId, date) => API.get(`/food/${profileId}/summary/${date}`);
+export const getWeeklySummary = (profileId, date) => API.get(`/food/${profileId}/weekly/${date}`);
+export const setDailyGoal = (profileId, goal) => API.post(`/food/${profileId}/goal`, goal);
+export const getDailyGoal = (profileId, date) => API.get(`/food/${profileId}/goal/${date}`);
 export const getDbStatus = () => API.get('/food/db-status');
 
-// ═══════════════ WATER INTAKE ═══════════════
+// ═══════════════ WATER INTAKE (scoped by profileId) ═══════════════
 
-export const logWater = (data) => API.post('/food/water', data);
-export const getWaterSummary = (date) => API.get(`/food/water/${date}`);
+export const logWater = (profileId, data) => API.post(`/food/${profileId}/water`, data);
+export const getWaterSummary = (profileId, date) => API.get(`/food/${profileId}/water/${date}`);
 export const deleteWaterLog = (id) => API.delete(`/food/water/${id}`);
 
-// ═══════════════ EXERCISE LOGGER ═══════════════
+// ═══════════════ EXERCISE LOGGER (scoped by profileId) ═══════════════
 
 export const searchExercises = (term, limit = 20, offset = 0) => API.get('/exercise/search', { params: { term, limit, offset } });
 export const getExerciseDetail = (exerciseId) => API.get(`/exercise/detail/${exerciseId}`);
-export const logExercise = (entry) => API.post('/exercise/log', entry);
-export const getExerciseLog = (date) => API.get(`/exercise/log/${date}`);
+export const logExercise = (profileId, entry) => API.post(`/exercise/${profileId}/log`, entry);
+export const getExerciseLog = (profileId, date) => API.get(`/exercise/${profileId}/log/${date}`);
 export const deleteExerciseLog = (id) => API.delete(`/exercise/log/${id}`);
-export const getExerciseSummary = (date) => API.get(`/exercise/summary/${date}`);
+export const getExerciseSummary = (profileId, date) => API.get(`/exercise/${profileId}/summary/${date}`);
 
 // ═══════════════ USER PROFILES ═══════════════
 
+export const registerUser = (data) => API.post('/profiles/register', data);
+export const loginUser = (data) => API.post('/profiles/login', data);
 export const createProfile = (profile) => API.post('/profiles', profile);
 export const getAllProfiles = () => API.get('/profiles');
 export const getProfileById = (id) => API.get(`/profiles/${id}`);

@@ -276,31 +276,32 @@ public class CalorieService {
         return foodDbSeeder;
     }
 
-    // ═══════════════ FOOD LOG ═══════════════
+    // ═══════════════ FOOD LOG (with profileId) ═══════════════
 
-    public FoodLog logFood(FoodLog entry) {
+    public FoodLog logFood(Long profileId, FoodLog entry) {
         if (entry.getLogDate() == null) {
             entry.setLogDate(LocalDate.now());
         }
+        entry.setProfileId(profileId);
         return foodLogRepo.save(entry);
     }
 
-    public List<FoodLog> getLogByDate(LocalDate date) {
-        return foodLogRepo.findByLogDateOrderByCreatedAtAsc(date);
+    public List<FoodLog> getLogByDate(Long profileId, LocalDate date) {
+        return foodLogRepo.findByProfileIdAndLogDateOrderByCreatedAtAsc(profileId, date);
     }
 
-    public List<FoodLog> getLogByDateAndMeal(LocalDate date, String mealType) {
-        return foodLogRepo.findByLogDateAndMealTypeOrderByCreatedAtAsc(date, mealType);
+    public List<FoodLog> getLogByDateAndMeal(Long profileId, LocalDate date, String mealType) {
+        return foodLogRepo.findByProfileIdAndLogDateAndMealTypeOrderByCreatedAtAsc(profileId, date, mealType);
     }
 
     public void deleteLogEntry(Long id) {
         foodLogRepo.deleteById(id);
     }
 
-    // ═══════════════ DAILY SUMMARY ═══════════════
+    // ═══════════════ DAILY SUMMARY (with profileId) ═══════════════
 
-    public Map<String, Object> getDailySummary(LocalDate date) {
-        List<FoodLog> logs = getLogByDate(date);
+    public Map<String, Object> getDailySummary(Long profileId, LocalDate date) {
+        List<FoodLog> logs = getLogByDate(profileId, date);
 
         double totalCalories = 0, totalProtein = 0, totalCarbs = 0, totalFat = 0, totalFiber = 0;
         Map<String, List<FoodLog>> mealGroups = new LinkedHashMap<>();
@@ -321,10 +322,10 @@ public class CalorieService {
         }
 
         // Get goals for this date (using the persistent logic from getGoal)
-        DailyGoal goal = getGoal(date);
+        DailyGoal goal = getGoal(profileId, date);
 
         // Water intake
-        Double waterIntakeRaw = waterLogRepo.sumAmountByDate(date);
+        Double waterIntakeRaw = waterLogRepo.sumAmountByProfileIdAndDate(profileId, date);
         double waterIntake = waterIntakeRaw != null ? waterIntakeRaw : 0.0;
 
         Map<String, Object> summary = new LinkedHashMap<>();
@@ -348,11 +349,11 @@ public class CalorieService {
         return summary;
     }
 
-    // ═══════════════ WEEKLY SUMMARY ═══════════════
+    // ═══════════════ WEEKLY SUMMARY (with profileId) ═══════════════
 
-    public List<Map<String, Object>> getWeeklySummary(LocalDate endDate) {
+    public List<Map<String, Object>> getWeeklySummary(Long profileId, LocalDate endDate) {
         LocalDate startDate = endDate.minusDays(6);
-        List<FoodLog> logs = foodLogRepo.findByLogDateBetweenOrderByLogDateAsc(startDate, endDate);
+        List<FoodLog> logs = foodLogRepo.findByProfileIdAndLogDateBetweenOrderByLogDateAsc(profileId, startDate, endDate);
 
         Map<LocalDate, Double> dailyCalories = new LinkedHashMap<>();
         for (int i = 0; i <= 6; i++) {
@@ -374,13 +375,14 @@ public class CalorieService {
         return result;
     }
 
-    // ═══════════════ DAILY GOAL ═══════════════
+    // ═══════════════ DAILY GOAL (with profileId) ═══════════════
 
-    public DailyGoal setGoal(DailyGoal goal) {
+    public DailyGoal setGoal(Long profileId, DailyGoal goal) {
         if (goal.getGoalDate() == null) {
             goal.setGoalDate(LocalDate.now());
         }
-        Optional<DailyGoal> existing = goalRepo.findByGoalDate(goal.getGoalDate());
+        goal.setProfileId(profileId);
+        Optional<DailyGoal> existing = goalRepo.findByProfileIdAndGoalDate(profileId, goal.getGoalDate());
         if (existing.isPresent()) {
             DailyGoal existingGoal = existing.get();
             existingGoal.setCalorieGoal(goal.getCalorieGoal());
@@ -393,12 +395,13 @@ public class CalorieService {
         return goalRepo.save(goal);
     }
 
-    public DailyGoal getGoal(LocalDate date) {
-        return goalRepo.findByGoalDate(date).orElseGet(() -> {
+    public DailyGoal getGoal(Long profileId, LocalDate date) {
+        return goalRepo.findByProfileIdAndGoalDate(profileId, date).orElseGet(() -> {
             // If no goal for today, try to find the most recent past goal
-            Optional<DailyGoal> pastGoalOpt = goalRepo.findFirstByGoalDateBeforeOrderByGoalDateDesc(date);
+            Optional<DailyGoal> pastGoalOpt = goalRepo.findFirstByProfileIdAndGoalDateBeforeOrderByGoalDateDesc(profileId, date);
             
             DailyGoal defaultGoal = new DailyGoal();
+            defaultGoal.setProfileId(profileId);
             if (pastGoalOpt.isPresent()) {
                 DailyGoal pastGoal = pastGoalOpt.get();
                 defaultGoal.setCalorieGoal(pastGoal.getCalorieGoal());
@@ -418,20 +421,21 @@ public class CalorieService {
         });
     }
 
-    // ═══════════════ WATER INTAKE ═══════════════
+    // ═══════════════ WATER INTAKE (with profileId) ═══════════════
 
-    public WaterLog logWater(LocalDate date, double amountMl) {
+    public WaterLog logWater(Long profileId, LocalDate date, double amountMl) {
         WaterLog log = new WaterLog();
+        log.setProfileId(profileId);
         log.setLogDate(date);
         log.setAmountMl(amountMl);
         return waterLogRepo.save(log);
     }
 
-    public Map<String, Object> getWaterSummary(LocalDate date) {
-        Double totalRaw = waterLogRepo.sumAmountByDate(date);
+    public Map<String, Object> getWaterSummary(Long profileId, LocalDate date) {
+        Double totalRaw = waterLogRepo.sumAmountByProfileIdAndDate(profileId, date);
         double total = totalRaw != null ? totalRaw : 0.0;
-        DailyGoal goal = getGoal(date);
-        List<WaterLog> logs = waterLogRepo.findByLogDateOrderByCreatedAtAsc(date);
+        DailyGoal goal = getGoal(profileId, date);
+        List<WaterLog> logs = waterLogRepo.findByProfileIdAndLogDateOrderByCreatedAtAsc(profileId, date);
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("date", date.toString());
         result.put("totalMl", round(total));

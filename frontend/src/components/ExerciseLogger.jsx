@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { searchExercises, getExerciseDetail, logExercise, getExerciseSummary, deleteExerciseLog } from '../services/api';
 
-export default function ExerciseLogger() {
+export default function ExerciseLogger({ profileId }) {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
@@ -27,12 +27,12 @@ export default function ExerciseLogger() {
   // ─── Data loading ──────────────────────
   const loadSummary = async () => {
     try {
-      const { data } = await getExerciseSummary(date);
+      const { data } = await getExerciseSummary(profileId, date);
       setSummary(data);
     } catch { /* ignore */ }
   };
 
-  useEffect(() => { loadSummary(); }, [date]);
+  useEffect(() => { if (profileId) loadSummary(); }, [date, profileId]);
 
   // Close suggestions on outside click
   useEffect(() => {
@@ -151,7 +151,7 @@ export default function ExerciseLogger() {
   const handleLog = async () => {
     if (!selectedExercise) return;
     const primaryMuscle = selectedExercise.primaryMuscles?.[0] || exerciseDetail?.primaryMuscles?.[0] || '';
-    await logExercise({
+    await logExercise(profileId, {
       exerciseName: selectedExercise.name,
       category: primaryMuscle,
       sets: parseInt(logForm.sets) || 0,

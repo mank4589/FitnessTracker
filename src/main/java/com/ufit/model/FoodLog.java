@@ -11,6 +11,8 @@ public class FoodLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long profileId;
+
     private String foodName;
     private double servingSize;    // grams
     private double calories;
@@ -33,6 +35,9 @@ public class FoodLog {
     // --- GETTERS AND SETTERS ---
 
     public Long getId() { return id; }
+
+    public Long getProfileId() { return profileId; }
+    public void setProfileId(Long profileId) { this.profileId = profileId; }
 
     public String getFoodName() { return foodName; }
     public void setFoodName(String foodName) { this.foodName = foodName; }

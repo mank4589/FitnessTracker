@@ -1,11 +1,1 @@
-package com.ufit.repository;
-
-import com.ufit.model.ExerciseLog;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.time.LocalDate;
-import java.util.List;
-
-public interface ExerciseLogRepository extends JpaRepository<ExerciseLog, Long> {
-    List<ExerciseLog> findByLogDateOrderByIdDesc(LocalDate logDate);
-}
+package com.ufit.repository;\r\n\r\nimport com.ufit.model.ExerciseLog;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\n\r\nimport java.time.LocalDate;\r\nimport java.util.List;\r\n\r\npublic interface ExerciseLogRepository extends JpaRepository<ExerciseLog, Long> {\r\n    List<ExerciseLog> findByProfileIdAndLogDateOrderByIdDesc(Long profileId, LocalDate logDate);\r\n}\r\n

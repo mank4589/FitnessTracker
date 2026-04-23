@@ -11,6 +11,8 @@ public class ExerciseLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long profileId;
+
     private String exerciseName;
     private String category;
 
@@ -25,6 +27,9 @@ public class ExerciseLog {
     // ── Getters & Setters ──
 
     public Long getId() { return id; }
+
+    public Long getProfileId() { return profileId; }
+    public void setProfileId(Long profileId) { this.profileId = profileId; }
 
     public String getExerciseName() { return exerciseName; }
     public void setExerciseName(String exerciseName) { this.exerciseName = exerciseName; }

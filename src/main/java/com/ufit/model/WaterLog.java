@@ -11,6 +11,8 @@ public class WaterLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long profileId;
+
     private LocalDate logDate;
     private double amountMl;        // milliliters
     private LocalDateTime createdAt;
@@ -23,6 +25,9 @@ public class WaterLog {
     // --- GETTERS AND SETTERS ---
 
     public Long getId() { return id; }
+
+    public Long getProfileId() { return profileId; }
+    public void setProfileId(Long profileId) { this.profileId = profileId; }
 
     public LocalDate getLogDate() { return logDate; }
     public void setLogDate(LocalDate logDate) { this.logDate = logDate; }

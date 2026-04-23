@@ -45,8 +45,8 @@
   font-size: 0.7rem;
   padding: 2px 8px;
   border-radius: 999px;
-  background: rgba(99, 102, 241, 0.15);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.15);
+  color: #d4d4d4;
   font-weight: 400;
 }
 
@@ -80,12 +80,12 @@
 }
 
 .radio-card:hover {
-  border-color: var(--accent, #6366f1);
+  border-color: var(--accent, #ffffff);
 }
 
 .radio-card.selected {
-  border-color: var(--accent, #6366f1);
-  background: rgba(99, 102, 241, 0.1);
+  border-color: var(--accent, #ffffff);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .radio-card input[type="radio"] {
@@ -198,8 +198,8 @@
 }
 
 .energy-stat.highlight {
-  background: rgba(99, 102, 241, 0.1);
-  border-color: rgba(99, 102, 241, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .energy-stat.target {

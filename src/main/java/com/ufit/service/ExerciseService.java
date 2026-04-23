@@ -119,25 +119,26 @@ public class ExerciseService {
         return detail;
     }
 
-    // ═══════════════ CRUD ═══════════════
+    // ═══════════════ CRUD (with profileId) ═══════════════
 
-    public ExerciseLog logExercise(ExerciseLog entry) {
+    public ExerciseLog logExercise(Long profileId, ExerciseLog entry) {
         if (entry.getLogDate() == null) {
             entry.setLogDate(LocalDate.now());
         }
+        entry.setProfileId(profileId);
         return logRepo.save(entry);
     }
 
-    public List<ExerciseLog> getLogsByDate(LocalDate date) {
-        return logRepo.findByLogDateOrderByIdDesc(date);
+    public List<ExerciseLog> getLogsByDate(Long profileId, LocalDate date) {
+        return logRepo.findByProfileIdAndLogDateOrderByIdDesc(profileId, date);
     }
 
     public void deleteLog(Long id) {
         logRepo.deleteById(id);
     }
 
-    public Map<String, Object> getDailySummary(LocalDate date) {
-        List<ExerciseLog> logs = getLogsByDate(date);
+    public Map<String, Object> getDailySummary(Long profileId, LocalDate date) {
+        List<ExerciseLog> logs = getLogsByDate(profileId, date);
 
         int totalSets = logs.stream().mapToInt(ExerciseLog::getSets).sum();
         int totalReps = logs.stream().mapToInt(ExerciseLog::getReps).sum();

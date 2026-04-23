@@ -27,7 +27,7 @@ const getDietBadge = (cat) => {
   }
 };
 
-export default function CalorieTracker() {
+export default function CalorieTracker({ profileId }) {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [summary, setSummary] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -54,7 +54,7 @@ export default function CalorieTracker() {
   // ─── Data loading ──────────────────────
   const loadSummary = async () => {
     try {
-      const { data } = await getDailySummary(date);
+      const { data } = await getDailySummary(profileId, date);
       setSummary(data);
       setGoalForm({
         calories: String(data.calorieGoal),
@@ -68,12 +68,12 @@ export default function CalorieTracker() {
 
   const loadWater = async () => {
     try {
-      const { data } = await getWaterSummary(date);
+      const { data } = await getWaterSummary(profileId, date);
       setWaterData(data);
     } catch { /* ignore */ }
   };
 
-  useEffect(() => { loadSummary(); loadWater(); }, [date]);
+  useEffect(() => { if (profileId) { loadSummary(); loadWater(); } }, [date, profileId]);
 
   useEffect(() => {
     getDbStatus().then(({ data }) => setDbStatus(data.status)).catch(() => {});
@@ -196,7 +196,7 @@ export default function CalorieTracker() {
       sugar: scaled.sugar,
       mealType, logDate: date,
     };
-    await logFood(entry);
+    await logFood(profileId, entry);
     setSelectedFood(null);
     setSearchQuery('');
     loadSummary();
@@ -213,7 +213,7 @@ export default function CalorieTracker() {
 
   // ─── Goal ──────────────────────────────
   const handleSaveGoal = async () => {
-    await setDailyGoal({
+    await setDailyGoal(profileId, {
       goalDate: date,
       calorieGoal: parseFloat(goalForm.calories),
       proteinGoal: parseFloat(goalForm.protein),
@@ -228,7 +228,7 @@ export default function CalorieTracker() {
 
   // ─── Water ─────────────────────────────
   const handleAddWater = async (ml) => {
-    await logWater({ date, amountMl: ml });
+    await logWater(profileId, { date, amountMl: ml });
     loadWater();
     loadSummary();
   };

@@ -34,12 +34,12 @@
 }
 
 .cwb-back-btn:hover {
-  border-color: #6366f1;
+  border-color: #ffffff;
   color: var(--text-primary, #fff);
 }
 
 .cwb-save-btn {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: #10b981;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -97,7 +97,7 @@
 
 .cwb-input:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: #ffffff;
 }
 
 .cwb-textarea {
@@ -123,16 +123,16 @@
   transition: all 0.2s;
 }
 
-.cwb-day-num:hover { border-color: #6366f1; }
+.cwb-day-num:hover { border-color: #ffffff; }
 
 .cwb-day-num.active {
-  background: #6366f1;
-  border-color: #6366f1;
+  background: #ffffff;
+  border-color: #ffffff;
 }
 
 .cwb-next-btn {
   width: 100%;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   color: white;
   border: none;
   padding: 14px 24px;
@@ -146,7 +146,7 @@
 
 .cwb-next-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4);
 }
 
 /* ─── Day Tabs ─── */
@@ -171,10 +171,10 @@
   min-width: 100px;
 }
 
-.cwb-day-tab:hover { border-color: #6366f1; }
+.cwb-day-tab:hover { border-color: #ffffff; }
 
 .cwb-day-tab.active {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: #ffffff;
   border-color: transparent;
 }
 
@@ -275,7 +275,7 @@
 }
 
 .cwb-planned-exercise:hover {
-  border-color: rgba(99, 102, 241, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .cwb-order-controls {
@@ -298,14 +298,14 @@
 }
 
 .cwb-order-btn:hover:not(:disabled) {
-  border-color: #6366f1;
+  border-color: #ffffff;
   color: var(--text-primary, #fff);
 }
 
 .cwb-order-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
 .cwb-order-num {
-  color: #818cf8;
+  color: #d4d4d4;
   font-weight: 800;
   font-size: 14px;
 }
@@ -364,7 +364,7 @@
 
 .cwb-param input:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: #ffffff;
 }
 
 .cwb-warmup-check {
@@ -393,7 +393,7 @@
 
 .cwb-notes-input:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: #ffffff;
 }
 
 .cwb-remove-btn {
@@ -467,8 +467,8 @@
 
 .cwb-search-input:focus {
   outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  border-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
 .cwb-search-input::placeholder {
@@ -483,7 +483,7 @@
   width: 18px;
   height: 18px;
   border: 2px solid var(--border, #3f3f46);
-  border-top-color: #6366f1;
+  border-top-color: #ffffff;
   border-radius: 50%;
   animation: cwb-spin 0.6s linear infinite;
 }
@@ -542,7 +542,7 @@
 }
 
 .cwb-search-result:hover {
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .cwb-result-thumb {
@@ -584,8 +584,8 @@
 }
 
 .cwb-muscle-pill {
-  background: rgba(99, 102, 241, 0.15);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.15);
+  color: #d4d4d4;
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 10px;
@@ -621,7 +621,7 @@
 .cwb-add-btn {
   width: 30px;
   height: 30px;
-  background: #6366f1;
+  background: #ffffff;
   border: none;
   color: white;
   border-radius: 8px;
@@ -635,7 +635,7 @@
 
 .cwb-add-btn:hover:not(:disabled) {
   transform: scale(1.1);
-  background: #818cf8;
+  background: #d4d4d4;
 }
 
 .cwb-add-btn:disabled {
@@ -646,7 +646,7 @@
 .cwb-load-more {
   padding: 14px;
   text-align: center;
-  color: #818cf8;
+  color: #d4d4d4;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -654,7 +654,7 @@
 }
 
 .cwb-load-more:hover {
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* ═══════════════ RESPONSIVE ═══════════════ */

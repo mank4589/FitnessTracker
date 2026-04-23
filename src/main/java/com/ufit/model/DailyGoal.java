@@ -10,7 +10,8 @@ public class DailyGoal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    private Long profileId;
+
     private LocalDate goalDate;
 
     private double calorieGoal;
@@ -29,6 +30,9 @@ public class DailyGoal {
     // --- GETTERS AND SETTERS ---
 
     public Long getId() { return id; }
+
+    public Long getProfileId() { return profileId; }
+    public void setProfileId(Long profileId) { this.profileId = profileId; }
 
     public LocalDate getGoalDate() { return goalDate; }
     public void setGoalDate(LocalDate goalDate) { this.goalDate = goalDate; }

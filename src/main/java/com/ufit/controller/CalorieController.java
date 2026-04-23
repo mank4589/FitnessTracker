@@ -60,24 +60,24 @@ public class CalorieController {
         return ResponseEntity.ok(calorieService.searchFood(query));
     }
 
-    // ═══════════════ FOOD LOG ═══════════════
+    // ═══════════════ FOOD LOG (scoped by profileId) ═══════════════
 
-    @PostMapping("/log")
-    public ResponseEntity<FoodLog> logFood(@RequestBody FoodLog entry) {
-        return ResponseEntity.ok(calorieService.logFood(entry));
+    @PostMapping("/{profileId}/log")
+    public ResponseEntity<FoodLog> logFood(@PathVariable Long profileId, @RequestBody FoodLog entry) {
+        return ResponseEntity.ok(calorieService.logFood(profileId, entry));
     }
 
-    @GetMapping("/log/{date}")
-    public ResponseEntity<List<FoodLog>> getLogByDate(@PathVariable String date) {
+    @GetMapping("/{profileId}/log/{date}")
+    public ResponseEntity<List<FoodLog>> getLogByDate(@PathVariable Long profileId, @PathVariable String date) {
         LocalDate d = parseDateSafe(date);
-        return ResponseEntity.ok(calorieService.getLogByDate(d));
+        return ResponseEntity.ok(calorieService.getLogByDate(profileId, d));
     }
 
-    @GetMapping("/log/{date}/{mealType}")
+    @GetMapping("/{profileId}/log/{date}/{mealType}")
     public ResponseEntity<List<FoodLog>> getLogByDateAndMeal(
-            @PathVariable String date, @PathVariable String mealType) {
+            @PathVariable Long profileId, @PathVariable String date, @PathVariable String mealType) {
         LocalDate d = parseDateSafe(date);
-        return ResponseEntity.ok(calorieService.getLogByDateAndMeal(d, mealType));
+        return ResponseEntity.ok(calorieService.getLogByDateAndMeal(profileId, d, mealType));
     }
 
     @DeleteMapping("/log/{id}")
@@ -86,25 +86,26 @@ public class CalorieController {
         return ResponseEntity.ok().build();
     }
 
-    // ═══════════════ DAILY SUMMARY ═══════════════
+    // ═══════════════ DAILY SUMMARY (scoped by profileId) ═══════════════
 
-    @GetMapping("/summary/{date}")
-    public ResponseEntity<Map<String, Object>> getDailySummary(@PathVariable String date) {
+    @GetMapping("/{profileId}/summary/{date}")
+    public ResponseEntity<Map<String, Object>> getDailySummary(@PathVariable Long profileId, @PathVariable String date) {
         LocalDate d = parseDateSafe(date);
-        return ResponseEntity.ok(calorieService.getDailySummary(d));
+        return ResponseEntity.ok(calorieService.getDailySummary(profileId, d));
     }
 
-    @GetMapping("/weekly/{date}")
-    public ResponseEntity<List<Map<String, Object>>> getWeeklySummary(@PathVariable String date) {
+    @GetMapping("/{profileId}/weekly/{date}")
+    public ResponseEntity<List<Map<String, Object>>> getWeeklySummary(@PathVariable Long profileId, @PathVariable String date) {
         LocalDate d = parseDateSafe(date);
-        return ResponseEntity.ok(calorieService.getWeeklySummary(d));
+        return ResponseEntity.ok(calorieService.getWeeklySummary(profileId, d));
     }
 
-    // ═══════════════ DAILY GOAL ═══════════════
+    // ═══════════════ DAILY GOAL (scoped by profileId) ═══════════════
 
-    @PostMapping("/goal")
-    public ResponseEntity<DailyGoal> setGoal(@RequestBody Map<String, Object> body) {
+    @PostMapping("/{profileId}/goal")
+    public ResponseEntity<DailyGoal> setGoal(@PathVariable Long profileId, @RequestBody Map<String, Object> body) {
         DailyGoal goal = new DailyGoal();
+        goal.setProfileId(profileId);
         if (body.containsKey("goalDate")) {
             goal.setGoalDate(parseDateSafe((String) body.get("goalDate")));
         }
@@ -123,30 +124,30 @@ public class CalorieController {
         if (body.containsKey("waterGoal")) {
             goal.setWaterGoal(((Number) body.get("waterGoal")).doubleValue());
         }
-        return ResponseEntity.ok(calorieService.setGoal(goal));
+        return ResponseEntity.ok(calorieService.setGoal(profileId, goal));
     }
 
-    @GetMapping("/goal/{date}")
-    public ResponseEntity<DailyGoal> getGoal(@PathVariable String date) {
+    @GetMapping("/{profileId}/goal/{date}")
+    public ResponseEntity<DailyGoal> getGoal(@PathVariable Long profileId, @PathVariable String date) {
         LocalDate d = parseDateSafe(date);
-        return ResponseEntity.ok(calorieService.getGoal(d));
+        return ResponseEntity.ok(calorieService.getGoal(profileId, d));
     }
 
-    // ═══════════════ WATER INTAKE ═══════════════
+    // ═══════════════ WATER INTAKE (scoped by profileId) ═══════════════
 
-    @PostMapping("/water")
-    public ResponseEntity<WaterLog> logWater(@RequestBody Map<String, Object> body) {
+    @PostMapping("/{profileId}/water")
+    public ResponseEntity<WaterLog> logWater(@PathVariable Long profileId, @RequestBody Map<String, Object> body) {
         LocalDate date = body.containsKey("date") ?
             parseDateSafe((String) body.get("date")) : LocalDate.now();
         double amount = body.containsKey("amountMl") ?
             ((Number) body.get("amountMl")).doubleValue() : 250;
-        return ResponseEntity.ok(calorieService.logWater(date, amount));
+        return ResponseEntity.ok(calorieService.logWater(profileId, date, amount));
     }
 
-    @GetMapping("/water/{date}")
-    public ResponseEntity<Map<String, Object>> getWaterSummary(@PathVariable String date) {
+    @GetMapping("/{profileId}/water/{date}")
+    public ResponseEntity<Map<String, Object>> getWaterSummary(@PathVariable Long profileId, @PathVariable String date) {
         LocalDate d = parseDateSafe(date);
-        return ResponseEntity.ok(calorieService.getWaterSummary(d));
+        return ResponseEntity.ok(calorieService.getWaterSummary(profileId, d));
     }
 
     @DeleteMapping("/water/{id}")
@@ -166,4 +167,3 @@ public class CalorieController {
         ));
     }
 }
-
