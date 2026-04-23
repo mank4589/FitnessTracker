@@ -1,1 +1,19 @@
-package com.ufit.repository;\r\n\r\nimport com.ufit.model.UserProfile;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.stereotype.Repository;\r\n\r\nimport java.util.Optional;\r\n\r\n@Repository\r\npublic interface UserProfileRepository extends JpaRepository<UserProfile, Long> {\r\n    \r\n    Optional<UserProfile> findByName(String name);\r\n    \r\n    boolean existsByName(String name);\r\n\r\n    Optional<UserProfile> findByUsername(String username);\r\n\r\n    boolean existsByUsername(String username);\r\n}\r\n
+package com.ufit.repository;
+
+import com.ufit.model.UserProfile;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface UserProfileRepository extends JpaRepository<UserProfile, Long> {
+
+    Optional<UserProfile> findByName(String name);
+
+    boolean existsByName(String name);
+
+    Optional<UserProfile> findByUsername(String username);
+
+    boolean existsByUsername(String username);
+}

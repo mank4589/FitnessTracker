@@ -1,1 +1,18 @@
-package com.ufit.repository;\r\n\r\nimport com.ufit.model.FoodLog;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.stereotype.Repository;\r\n\r\nimport java.time.LocalDate;\r\nimport java.util.List;\r\n\r\n@Repository\r\npublic interface FoodLogRepository extends JpaRepository<FoodLog, Long> {\r\n\r\n    List<FoodLog> findByProfileIdAndLogDateOrderByCreatedAtAsc(Long profileId, LocalDate logDate);\r\n\r\n    List<FoodLog> findByProfileIdAndLogDateAndMealTypeOrderByCreatedAtAsc(Long profileId, LocalDate logDate, String mealType);\r\n\r\n    List<FoodLog> findByProfileIdAndLogDateBetweenOrderByLogDateAsc(Long profileId, LocalDate start, LocalDate end);\r\n}\r\n
+package com.ufit.repository;
+
+import com.ufit.model.FoodLog;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Repository
+public interface FoodLogRepository extends JpaRepository<FoodLog, Long> {
+
+    List<FoodLog> findByProfileIdAndLogDateOrderByCreatedAtAsc(Long profileId, LocalDate logDate);
+
+    List<FoodLog> findByProfileIdAndLogDateAndMealTypeOrderByCreatedAtAsc(Long profileId, LocalDate logDate, String mealType);
+
+    List<FoodLog> findByProfileIdAndLogDateBetweenOrderByLogDateAsc(Long profileId, LocalDate start, LocalDate end);
+}
