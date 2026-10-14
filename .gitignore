@@ -37,3 +37,16 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Logs & Build Outputs ###
+*.log
+*_output.txt
+
+### Node & Vite ###
+node_modules/
+.vite/
+
+### Temporary & Scrap ###
+*.ipynb
+.ipynb_checkpoints/
+*.ps1
